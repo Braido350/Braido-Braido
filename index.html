@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Braido&Braido</title>
+</head>
+
+<body>
+  <header>
+    <h1>
+      <span data-js="company-name"  class="inline-block"></span> -
+      <span data-js="company-phone" class="inline-block"></span>
+    </h1>
+  </header>
+
+  <div class="container">
+    <form data-js="from-register">
+      <ul>
+        <li>
+          <label for="img">Imagem do carro:</label>
+          <input id="img" data-js="imgCar" type="url">
+        </li>
+        <li>
+          <label for="marca">Marca/Modelo:</label>
+          <input id="marca" data-js="marca" type="text">
+        </li>
+        <li>
+          <label for="ano">Ano:</label>
+          <input id="ano" data-js="ano" type="text">
+        </li>
+        <li>
+          <label for="placa">Placa:</label>
+          <input id="placa" data-js="placa" type="text">
+        </li>
+        <li>
+          <label for="cor">Cor:</label>
+          <input id="cor" data-js="cor" type="text">
+        </li>
+        <button type="submit" data-js="cadastro">Cadastrar</button>
+      </ul>
+    </form>
+  </div>
+
+
+  <table>
+    <thead>
+      <tr>
+        <th>Imagem do carro</th>
+        <th>Marca/Modelo</th>
+        <th>Ano</th>
+        <th>Placa</th>
+        <th>Cor</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  </div>
+  <script src="dom.js"></script>
+  <script src="challenge-29.js"></script>
+</body>
+
+</html>

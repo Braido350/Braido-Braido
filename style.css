@@ -1,0 +1,112 @@
+/* Estilo para o cabeçalho */
+header {
+  background-color: #333;
+  /* Cor de fundo */
+  color: #fff;
+  /* Cor do texto */
+  padding: 10px;
+  /* Espaçamento interno */
+}
+
+header h1 {
+  margin: 0;
+  /* Remova as margens padrão */
+}
+
+header h1 span:first-child {
+  font-weight: bold;
+  /* Deixa o texto em negrito */
+  font-size: 1.5em;
+  /* Tamanho do texto */
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+
+/* Estilo para o formulário */
+form {
+  margin-top: 20px;
+  /* Margem superior */
+}
+
+form ul {
+  list-style-type: none;
+  /* Remove marcadores de lista */
+  padding: 0;
+  /* Remova o preenchimento padrão da lista */
+}
+
+form ul li {
+  margin-bottom: 10px;
+  /* Margem inferior */
+}
+
+form ul li label {
+  display: block;
+  /* Transforma o rótulo em bloco */
+  font-weight: bold;
+  /* Deixa o texto em negrito */
+}
+
+form ul li input {
+  width: 300px;
+  /* Largura total */
+  padding: 10px;
+  /* Espaçamento interno */
+  border: 1px solid #ccc;
+  /* Borda cinza */
+  border-radius: 4px;
+  /* Borda arredondada */
+}
+
+form button {
+  background-color: #333;
+  /* Cor de fundo */
+  color: #fff;
+  /* Cor do texto */
+  border: none;
+  /* Remove a borda */
+  padding: 10px 20px;
+  /* Espaçamento interno */
+  border-radius: 4px;
+  /* Borda arredondada */
+  cursor: pointer;
+  /* Mostra o cursor de mão ao passar */
+}
+
+form button:hover {
+  background-color: #555;
+  /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo para a tabela */
+table {
+  width: 100%;
+  /* Largura total */
+  border-collapse: collapse;
+  /* Colapso de borda */
+  margin-top: 20px;
+  /* Margem superior */
+}
+
+table th,
+table td {
+  border: 1px solid #ccc;
+  /* Borda cinza */
+  padding: 8px;
+  /* Espaçamento interno */
+  text-align: left;
+  /* Alinhamento do texto à esquerda */
+}
+
+table th {
+  background-color: #f2f2f2;
+  /* Cor de fundo do cabeçalho */
+}
+
+img {
+  max-width: 18%;
+  height: auto;
+}
