@@ -1,40 +1,19 @@
-(function (DOM, doc) {
+(function (DOM, document) {
   'use strict';
 
   /*
-  Vamos estruturar um pequeno app utilizando módulos.
-  Nosso APP vai ser um cadastro de carros. Vamos fazê-lo por partes.
-  A primeira etapa vai ser o cadastro de veículos, de deverá funcionar da
-  seguinte forma:
-  - No início do arquivo, deverá ter as informações da sua empresa - nome e
-  telefone (já vamos ver como isso vai ser feito)
-  - Ao abrir a tela, ainda não teremos carros cadastrados. Então deverá ter
-  um formulário para cadastro do carro, com os seguintes campos:
-    - Imagem do carro (deverá aceitar uma URL)
-    - Marca / Modelo
-    - Ano
-    - Placa
-    - Cor
-    - e um botão "Cadastrar"
+  Agora vamos criar a funcionalidade de "remover" um carro. Adicione uma nova
+  coluna na tabela, com um botão de remover.
 
-  Logo abaixo do formulário, deverá ter uma tabela que irá mostrar todos os
-  carros cadastrados. Ao clicar no botão de cadastrar, o novo carro deverá
-  aparecer no final da tabela.
+  Ao clicar nesse botão, a linha da tabela deve ser removida.
 
-  Agora você precisa dar um nome para o seu app. Imagine que ele seja uma
-  empresa que vende carros. Esse nosso app será só um catálogo, por enquanto.
-  Dê um nome para a empresa e um telefone fictício, preechendo essas informações
-  no arquivo company.json que já está criado.
+  Faça um pull request no seu repositório, na branch `challenge-31`, e cole
+  o link do pull request no `console.log` abaixo.
 
-  Essas informações devem ser adicionadas no HTML via Ajax.
-
-  Parte técnica:
-  Separe o nosso módulo de DOM criado nas últimas aulas em
-  um arquivo DOM.js.
-
-  E aqui nesse arquivo, faça a lógica para cadastrar os carros, em um módulo
-  que será nomeado de "app".
+  Faça um pull request, também com a branch `challenge-31`, mas no repositório
+  do curso, para colar o link do pull request do seu repo.
   */
+
   function app() {
     var ajax = new XMLHttpRequest();
     var $companyName = new DOM('[data-js="company-name"]');
@@ -126,6 +105,7 @@
       appendCellToRow(newRow, formData.ano);
       appendCellToRow(newRow, formData.placa);
       appendCellToRow(newRow, formData.cor);
+      buttonRemoveCar(newRow)
       return newRow;
     }
 
@@ -134,6 +114,16 @@
       cell.textContent = value;
       row.appendChild(cell);
     }
+
+    function buttonRemoveCar(row){
+      var remove = document.createElement('button')
+      remove.textContent = 'remove';
+      remove.addEventListener('click', function() {
+        row.remove();
+      });
+      row.appendChild(remove);
+    } 
+   
 
     calJSON();
 }
