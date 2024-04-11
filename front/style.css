@@ -4,7 +4,7 @@ header {
   /* Cor de fundo */
   color: #fff;
   /* Cor do texto */
-  padding: 10px;
+  padding-left: 20px;
   /* Espaçamento interno */
 }
 
@@ -16,7 +16,7 @@ header h1 {
 header h1 span:first-child {
   font-weight: bold;
   /* Deixa o texto em negrito */
-  font-size: 1.5em;
+  font-size: 1em;
   /* Tamanho do texto */
 }
 
@@ -27,7 +27,7 @@ header h1 span:first-child {
 
 /* Estilo para o formulário */
 form {
-  margin-top: 20px;
+  margin-top: 10px;
   /* Margem superior */
 }
 
@@ -111,3 +111,18 @@ img {
   height: auto;
 }
 
+.container {
+  display: flex;
+  /* Ativa o layout flexível */
+}
+
+.form-container,
+.table-container {
+  flex: 1;
+  /* Distribui o espaço disponível igualmente entre os dois containers */
+}
+
+.table-container {
+  margin-left: 1px;
+  /* Espaçamento entre o formulário e a tabela */
+}
