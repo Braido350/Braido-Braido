@@ -69,17 +69,13 @@
       event.preventDefault();
       var formData = getFormData();
       appendRowToTable(formData);
-      debugger
       clearFormFields();
     }
-
-    function clearFormFields(){
-      var inputs = document.querySelectorAll('[data-js="form-register"]')
-      inputs.forEach(function(input){
-        input.value = '';
-        debugger
-      });
-    }
+    
+    function clearFormFields() {
+      var formElement = $formRegister.get()[0];
+      formElement.reset();
+    }    
 
     function getFormData() {
       return {
