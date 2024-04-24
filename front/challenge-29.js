@@ -21,7 +21,7 @@
   As mudanças que você irá precisar fazer no seu projeto são:
 
   - Para listar os carros cadastrados ao carregar o seu projeto, faça um request GET no endereço
-  `http://localhost:3000/car`
+  `http://localhost:3000/car`//
   - Para cadastrar um novo carro, faça um POST no endereço `http://localhost:3000/car`, enviando
   os seguintes campos:
     - `image` com a URL da imagem do carro;
@@ -44,25 +44,74 @@
     var phoneElement = document.createElement('p');
     var nameElement = document.createElement('p');
     $formRegister.on('submit', newForm);
+    calJSON();
+    calServer();
+    // sendServer();
 
     function calJSON() {
-      ajax.open('GET', 'company.json', true);
-      ajax.send();
-      ajax.addEventListener('readystatechange', handleReadyStateChange);
+      (function(){
+          ajax.open('GET', 'company.json', true);
+          ajax.send();
+          ajax.addEventListener('readystatechange', handleReadyStateChange);
+        
+
+        function handleReadyStateChange() {
+          if (ajax.readyState === XMLHttpRequest.DONE && ajax.status === 200) {
+            var response = JSON.parse(ajax.responseText);
+            displayData(response);
+          }
+        }
+
+        function displayData(dados) {
+          nameElement.textContent = dados.name;
+          phoneElement.textContent = dados.phone;
+          $companyName.get()[0].appendChild(nameElement);
+          $companyPhone.get()[0].appendChild(phoneElement);
+        }
+      });
+    }
+    
+    function calServer() {
+      (function(){
+        ajax.open('GET', 'http://localhost:3000/car');
+        ajax.send();
+        ajax.addEventListener('readystatechange', handleReadyStateServer);
+
+        function handleReadyStateServer() {
+          if (ajax.readyState === XMLHttpRequest.DONE && ajax.status === 200) {
+            var response = JSON.parse(ajax.responseText);
+            caltableData(response);
+          }
+        }
+        
+        function caltableData(table){
+          var newRow = createTableRow(table);
+          var tableBody = document.querySelector('table tbody');
+          tableBody.appendChild(newRow);
+        }
+      });
     }
 
-    function handleReadyStateChange() {
-      if (ajax.readyState === XMLHttpRequest.DONE && ajax.status === 200) {
-        var response = JSON.parse(ajax.responseText);
-        displayData(response);
-      }
-    }
+    function sendServer(){
+      (function(){
+        ajax.open('POST', 'http://localhost:3000/car');
+        ajax.send();
+        ajax.addEventListener('readystatechange', handleReadyStateServer);
 
-    function displayData(dados) {
-      nameElement.textContent = dados.name;
-      phoneElement.textContent = dados.phone;
-      $companyName.get()[0].appendChild(nameElement);
-      $companyPhone.get()[0].appendChild(phoneElement);
+        function handleReadyStateServer(){
+          if(ajax,readyState === XMLHttpRequest.DONE && ajax.status === 200){
+            var response = JSON.parse(ajax.responseText)
+            sendtableData(response)
+          }
+        }
+
+        function sendtableData(table){
+          var newRow = createTableRow(table);
+          var tableBody = document.querySelector('table tbody');
+          tableBody.appendChild(newRow)
+        }
+        
+      })
     }
 
     function newForm(event) {
@@ -153,7 +202,6 @@
     } 
    
 
-    calJSON();
 }
 
 document.addEventListener('DOMContentLoaded', function () {
