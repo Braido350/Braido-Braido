@@ -46,14 +46,12 @@
     $formRegister.on('submit', newForm);
     calJSON();
     calServer();
-    // sendServer();
 
     function calJSON() {
-      (function(){
-          ajax.open('GET', 'company.json', true);
-          ajax.send();
-          ajax.addEventListener('readystatechange', handleReadyStateChange);
-        
+        ajax.open('GET', 'company.json', true);
+        ajax.send();
+        ajax.addEventListener('readystatechange', handleReadyStateChange);
+
 
         function handleReadyStateChange() {
           if (ajax.readyState === XMLHttpRequest.DONE && ajax.status === 200) {
@@ -68,64 +66,70 @@
           $companyName.get()[0].appendChild(nameElement);
           $companyPhone.get()[0].appendChild(phoneElement);
         }
-      });
+    }
+
+    function calServer() {
+      ajax.open('GET', 'http://localhost:3000/car');
+      ajax.send();
+      ajax.addEventListener('readystatechange', handleReadyStateServer);
+    
+      function handleReadyStateServer() {
+        if (ajax.readyState === XMLHttpRequest.DONE && ajax.status === 200) {
+          var response = JSON.parse(ajax.responseText);
+          console.log(response);
+          caltableData(response);
+        }
+      }
+    
+      function caltableData(cars) {
+        var tableBody = document.querySelector('table tbody');
+        tableBody.innerHTML = '';
+        cars.forEach(car => {
+          var newRow = createTableRow(car);
+          tableBody.appendChild(newRow);
+        });
+        
+      }
     }
     
-    function calServer() {
-      (function(){
-        ajax.open('GET', 'http://localhost:3000/car');
-        ajax.send();
+    function sendServer(formData) {
+      var jsonData = {
+        image: formData.imgCar,
+        brandModel: formData.marca,
+        year: formData.ano,
+        plate: formData.placa,
+        color: formData.cor
+      };
+      
+      (function () {
+        ajax.open('POST', 'http://localhost:3000/car');
+        ajax.setRequestHeader('Content-Type', 'application/json');
+        ajax.send(JSON.stringify(jsonData));
         ajax.addEventListener('readystatechange', handleReadyStateServer);
-
+        
         function handleReadyStateServer() {
           if (ajax.readyState === XMLHttpRequest.DONE && ajax.status === 200) {
-            var response = JSON.parse(ajax.responseText);
-            caltableData(response);
-          }
-        }
-        
-        function caltableData(table){
-          var newRow = createTableRow(table);
-          var tableBody = document.querySelector('table tbody');
-          tableBody.appendChild(newRow);
-        }
-      });
-    }
-
-    function sendServer(){
-      (function(){
-        ajax.open('POST', 'http://localhost:3000/car');
-        ajax.send();
-        ajax.addEventListener('readystatechange', handleReadyStateServer);
-
-        function handleReadyStateServer(){
-          if(ajax,readyState === XMLHttpRequest.DONE && ajax.status === 200){
             var response = JSON.parse(ajax.responseText)
             sendtableData(response)
+            calServer();
           }
         }
-
-        function sendtableData(table){
-          var newRow = createTableRow(table);
-          var tableBody = document.querySelector('table tbody');
-          tableBody.appendChild(newRow)
-        }
-        
       })
     }
-
+    
     function newForm(event) {
       event.preventDefault();
       var formData = getFormData();
       appendRowToTable(formData);
+      sendServer(formData);
       clearFormFields();
     }
     
     function clearFormFields() {
       var formElement = $formRegister.get()[0];
       formElement.reset();
-    }    
-
+    }
+    
     function getFormData() {
       return {
         imgCar: new DOM('[data-js="imgCar"]').get()[0].value,
@@ -145,10 +149,10 @@
     function isImageURL(url) {
       return new Promise((resolve, reject) => {
         var img = new Image();
-        img.onload = function() {
+        img.onload = function () {
           resolve(true);
         };
-        img.onerror = function() {
+        img.onerror = function () {
           resolve(false);
         };
         img.src = url;
@@ -192,21 +196,21 @@
       row.appendChild(cell);
     }
 
-    function buttonRemoveCar(row){
+    function buttonRemoveCar(row) {
       var remove = document.createElement('button')
       remove.textContent = 'remove';
-      remove.addEventListener('click', function() {
+      remove.addEventListener('click', function () {
         row.remove();
       });
       row.appendChild(remove);
-    } 
-   
+    }
 
-}
 
-document.addEventListener('DOMContentLoaded', function () {
-  app();
-});
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    app();
+  });
 
 
 })(window.DOM, document);
